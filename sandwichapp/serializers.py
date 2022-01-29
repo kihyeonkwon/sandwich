@@ -52,6 +52,6 @@ class SandwichSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sandwich
-        fields=['bread','toppings', 'cheese', 'sauces', 'price']
+        fields=['id','bread','toppings', 'cheese', 'sauces', 'price']
 
 

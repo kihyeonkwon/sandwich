@@ -41,6 +41,7 @@ class SandwichViewSet(viewsets.ModelViewSet):
         bread=get_object_or_404(Bread, pk=bread_id)
         if bread.inventory_count <=0 :
             enough_ingredients = False
+            message="not enough bread"
 
         topping_ids = request.data["toppings"]
         toppings = []
@@ -49,11 +50,13 @@ class SandwichViewSet(viewsets.ModelViewSet):
             toppings.append(topping)
             if topping.inventory_count <=0 :
                 enough_ingredients = False
+                message="not enough topping"
 
         cheese_id = request.data["cheese"]
         cheese=get_object_or_404(Cheese, pk=cheese_id)
         if cheese.inventory_count <=0 :
             enough_ingredients = False
+            message = "not enough cheese"
 
         sauce_ids = request.data["sauces"]
         sauces = []
@@ -62,11 +65,12 @@ class SandwichViewSet(viewsets.ModelViewSet):
             sauces.append(sauce)
             if sauce.inventory_count <=0 :
                 enough_ingredients = False
+                message = "not enough sauce"
 
 
         #재료부족
         if not enough_ingredients:
-            return Response({"Fail":"Not enough ingredients"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"Fail":message}, status=status.HTTP_400_BAD_REQUEST)
 
 
         #2개이하
@@ -103,14 +107,15 @@ class SandwichViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, format=None):
-        sandwich_id = request.data["id"]
+    def destroy(self, request, pk):
+        sandwich_id = pk
         sandwich = get_object_or_404(Sandwich, pk=sandwich_id)
 
         bread = sandwich.bread
         cheese = sandwich.cheese
         toppings = sandwich.toppings
         sauces = sandwich.sauces
+        price = sandwich.price
 
         bread.inventory_count += 1
         bread.save()
@@ -118,14 +123,19 @@ class SandwichViewSet(viewsets.ModelViewSet):
         cheese.inventory_count += 1
         cheese.save()
 
+
+        topping_list = []
         for topping in toppings.all():
             topping.inventory_count += 1
+            topping_list.append(topping.name)
             topping.save()
         
+        sauce_list = []
         for sauce in sauces.all():
             sauce.inventory_count += 1
+            sauce_list.append(sauce.name)
             sauce.save()
 
         sandwich.delete()
 
-        return Response(status.HTTP_204_NO_CONTENT)
+        return Response({"bread":bread.name, "cheese":cheese.name, "toppings":topping_list, "sauces":sauce_list, "price":price},status.HTTP_200_OK)

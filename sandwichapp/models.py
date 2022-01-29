@@ -1,29 +1,35 @@
 from django.db import models
+from safedelete.models import SafeDeleteModel
+from safedelete.models import SOFT_DELETE
 
 # Create your models here.
 
-class Bread(models.Model):
+class Bread(SafeDeleteModel):
+    _safedelete_policy=SOFT_DELETE
     name = models.CharField(max_length=255, unique=True)
     inventory_count = models.IntegerField()
     price = models.IntegerField()
     def __str__(self):
         return f'{self.name} 가격{self.price} 남은갯수{self.inventory_count}'
 
-class Topping(models.Model):
+class Topping(SafeDeleteModel):
+    _safedelete_policy=SOFT_DELETE
     name = models.CharField(max_length=255, unique=True)
     inventory_count = models.IntegerField()
     price = models.IntegerField()
     def __str__(self):
         return f'{self.name} 가격{self.price} 남은갯수{self.inventory_count}'    
 
-class Cheese(models.Model):
+class Cheese(SafeDeleteModel):
+    _safedelete_policy=SOFT_DELETE
     name = models.CharField(max_length=255, unique=True)
     inventory_count = models.IntegerField()
     price = models.IntegerField()
     def __str__(self):
         return f'{self.name} 가격{self.price} 남은갯수{self.inventory_count}'
 
-class Sauce(models.Model):
+class Sauce(SafeDeleteModel):
+    _safedelete_policy=SOFT_DELETE
     name = models.CharField(max_length=255, unique=True)
     inventory_count = models.IntegerField()
     price = models.IntegerField()
