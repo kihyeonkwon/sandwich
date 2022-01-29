@@ -44,6 +44,6 @@ class Sandwich(models.Model):
         return self.bread.price
 
     def __str__(self):
-        return f'{self.bread}{self.toppings}{self.cheese}{self.sauces} 가격{self.price}'
+        return f'{self.bread}{list(self.toppings.all())}{self.cheese}{list(self.sauces.all())} '
 
 

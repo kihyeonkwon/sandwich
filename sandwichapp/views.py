@@ -124,33 +124,65 @@ class SandwichView(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
+        enough_ingredients = True
+
         bread_id = request.data["bread"]
         bread=Bread.objects.get(pk=bread_id)
+        if bread.inventory_count <=0 :
+            enough_ingredients = False
 
         topping_ids = request.data["toppings"]
         toppings = []
         for id in topping_ids:
             topping = Topping.objects.get(pk=id)
             toppings.append(topping)
+            if topping.inventory_count <=0 :
+                enough_ingredients = False
 
         cheese_id = request.data["cheese"]
         cheese=Cheese.objects.get(pk=cheese_id)
+        if cheese.inventory_count <=0 :
+            enough_ingredients = False
 
         sauce_ids = request.data["sauces"]
         sauces = []
         for id in sauce_ids:
             sauce = Sauce.objects.get(pk=id)
             sauces.append(sauce)
+            if sauce.inventory_count <=0 :
+                enough_ingredients = False
 
 
-        #검증
-        #0개이상
+        #재료부족
+        if not enough_ingredients:
+            return Response({"Fail":"Not enough ingredients"}, status=status.HTTP_400_BAD_REQUEST)
+
+
         #2개이하
+        if len(sauces) > 2:
+            return Response({"Fail":"Choose under 3 sauces"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if len(toppings)>2:
+            return Response({"Fail":"Choose under 3 toppings"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+        
         #갯수차감
+        bread.inventory_count -= 1
+        bread.save()
+        
+        cheese.inventory_count -= 1
+        cheese.save()
+
+        for sauce in sauces:
+            sauce.inventory_count -=1
+            sauce.save()
+        for topping in toppings:
+            topping.inventory_count -=1
+            topping.save()
 
         serializer = SandwichSerializer(data={})
         if serializer.is_valid():
             serializer.save(bread=bread, cheese=cheese, toppings=toppings, sauces = sauces)
             return Response(serializer.data)
-        print('error')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
