@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from sandwichapp import serializers
 from sandwichapp.models import Bread, Topping, Cheese, Sauce, Sandwich
 from sandwichapp.serializers import BreadSerializer, ToppingSerializer, CheeseSerializer, SauceSerializer, SandwichSerializer
@@ -26,9 +26,6 @@ class SauceViewSet(viewsets.ModelViewSet):
     serializer_class = SauceSerializer
 
 
-    
-
-
 class SandwichViewSet(viewsets.ModelViewSet):
     queryset = Sandwich.objects.all()
     serializer_class = SandwichSerializer
@@ -41,27 +38,27 @@ class SandwichViewSet(viewsets.ModelViewSet):
         price = 0
 
         bread_id = request.data["bread"]
-        bread=Bread.objects.get(pk=bread_id)
+        bread=get_object_or_404(Bread, pk=bread_id)
         if bread.inventory_count <=0 :
             enough_ingredients = False
 
         topping_ids = request.data["toppings"]
         toppings = []
         for id in topping_ids:
-            topping = Topping.objects.get(pk=id)
+            topping=get_object_or_404(Topping, pk=id)
             toppings.append(topping)
             if topping.inventory_count <=0 :
                 enough_ingredients = False
 
         cheese_id = request.data["cheese"]
-        cheese=Cheese.objects.get(pk=cheese_id)
+        cheese=get_object_or_404(Cheese, pk=cheese_id)
         if cheese.inventory_count <=0 :
             enough_ingredients = False
 
         sauce_ids = request.data["sauces"]
         sauces = []
         for id in sauce_ids:
-            sauce = Sauce.objects.get(pk=id)
+            sauce=get_object_or_404(Sauce, pk=id)
             sauces.append(sauce)
             if sauce.inventory_count <=0 :
                 enough_ingredients = False
@@ -106,3 +103,29 @@ class SandwichViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, format=None):
+        sandwich_id = request.data["id"]
+        sandwich = get_object_or_404(Sandwich, pk=sandwich_id)
+
+        bread = sandwich.bread
+        cheese = sandwich.cheese
+        toppings = sandwich.toppings
+        sauces = sandwich.sauces
+
+        bread.inventory_count += 1
+        bread.save()
+
+        cheese.inventory_count += 1
+        cheese.save()
+
+        for topping in toppings.all():
+            topping.inventory_count += 1
+            topping.save()
+        
+        for sauce in sauces.all():
+            sauce.inventory_count += 1
+            sauce.save()
+
+        sandwich.delete()
+
+        return Response(status.HTTP_204_NO_CONTENT)
