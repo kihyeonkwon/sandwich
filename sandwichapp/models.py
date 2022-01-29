@@ -35,10 +35,7 @@ class Sandwich(models.Model):
     toppings = models.ManyToManyField(Topping)
     cheese = models.ForeignKey(Cheese, on_delete=models.DO_NOTHING)
     sauces = models.ManyToManyField(Sauce)
-
-
-    def get_price(self):
-        return self.bread.price
+    price = models.IntegerField()
 
     def __str__(self):
         return f'{self.bread}{list(self.toppings.all())}{self.cheese}{list(self.sauces.all())} '

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sandwichapp',
     'rest_framework',
+    'django_filters',
 ]
 
 

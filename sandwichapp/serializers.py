@@ -45,25 +45,13 @@ class SandwichSerializer(serializers.ModelSerializer):
             model = Sauce
             fields = ['name', 'price']
 
-
-
     bread = BreadSerializer(read_only=True)
     toppings = ToppingSerializer(many=True, read_only=True)
     cheese = CheeseSerializer(read_only=True)
     sauces = SauceSerializer(many=True, read_only=True)
-    price = serializers.SerializerMethodField()
 
     class Meta:
         model = Sandwich
         fields=['bread','toppings', 'cheese', 'sauces', 'price']
 
-    def get_price(self, obj):
-        total_price = 0
-        for topping in obj.toppings.all():
-            total_price += topping.price
-        for sauce in obj.sauces.all():
-            total_price += sauce.price
-        total_price += obj.bread.price
-        total_price += obj.cheese.price
 
-        return total_price
