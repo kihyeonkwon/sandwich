@@ -35,4 +35,6 @@ class Sandwich(models.Model):
     toppings = models.ManyToManyField(Topping)
     cheese = models.ForeignKey(Cheese, on_delete=models.DO_NOTHING)
     sauces = models.ManyToManyField(Sauce)
+    price = models.IntegerField()
+
 
