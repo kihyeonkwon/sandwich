@@ -1,0 +1,1118 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /sandwichapp/bread/:
+    get:
+      operationId: listBreads
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Bread'
+          description: ''
+      tags:
+      - sandwichapp
+    post:
+      operationId: createBread
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bread'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Bread'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Bread'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bread'
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/bread/{id}/:
+    get:
+      operationId: retrieveBread
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this bread.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bread'
+          description: ''
+      tags:
+      - sandwichapp
+    put:
+      operationId: updateBread
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this bread.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bread'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Bread'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Bread'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bread'
+          description: ''
+      tags:
+      - sandwichapp
+    patch:
+      operationId: partialUpdateBread
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this bread.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bread'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Bread'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Bread'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bread'
+          description: ''
+      tags:
+      - sandwichapp
+    delete:
+      operationId: destroyBread
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this bread.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/topping/:
+    get:
+      operationId: listToppings
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topping'
+          description: ''
+      tags:
+      - sandwichapp
+    post:
+      operationId: createTopping
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topping'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Topping'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Topping'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topping'
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/topping/{id}/:
+    get:
+      operationId: retrieveTopping
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this topping.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topping'
+          description: ''
+      tags:
+      - sandwichapp
+    put:
+      operationId: updateTopping
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this topping.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topping'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Topping'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Topping'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topping'
+          description: ''
+      tags:
+      - sandwichapp
+    patch:
+      operationId: partialUpdateTopping
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this topping.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Topping'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Topping'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Topping'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Topping'
+          description: ''
+      tags:
+      - sandwichapp
+    delete:
+      operationId: destroyTopping
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this topping.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/cheese/:
+    get:
+      operationId: listCheeses
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cheese'
+          description: ''
+      tags:
+      - sandwichapp
+    post:
+      operationId: createCheese
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cheese'
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/cheese/{id}/:
+    get:
+      operationId: retrieveCheese
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this cheese.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cheese'
+          description: ''
+      tags:
+      - sandwichapp
+    put:
+      operationId: updateCheese
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this cheese.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cheese'
+          description: ''
+      tags:
+      - sandwichapp
+    patch:
+      operationId: partialUpdateCheese
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this cheese.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cheese'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cheese'
+          description: ''
+      tags:
+      - sandwichapp
+    delete:
+      operationId: destroyCheese
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this cheese.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/sauce/:
+    get:
+      operationId: listSauces
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sauce'
+          description: ''
+      tags:
+      - sandwichapp
+    post:
+      operationId: createSauce
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sauce'
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/sauce/{id}/:
+    get:
+      operationId: retrieveSauce
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sauce.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sauce'
+          description: ''
+      tags:
+      - sandwichapp
+    put:
+      operationId: updateSauce
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sauce.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sauce'
+          description: ''
+      tags:
+      - sandwichapp
+    patch:
+      operationId: partialUpdateSauce
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sauce.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sauce'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sauce'
+          description: ''
+      tags:
+      - sandwichapp
+    delete:
+      operationId: destroySauce
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sauce.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/sandwich/:
+    get:
+      operationId: listSandwichs
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: bread
+        required: false
+        in: query
+        description: bread
+        schema:
+          type: string
+      - name: toppings
+        required: false
+        in: query
+        description: toppings
+        schema:
+          type: string
+      - name: cheese
+        required: false
+        in: query
+        description: cheese
+        schema:
+          type: string
+      - name: sauces
+        required: false
+        in: query
+        description: sauces
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=400&limit=100
+                  previous:
+                    type: string
+                    nullable: true
+                    format: uri
+                    example: http://api.example.org/accounts/?offset=200&limit=100
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Sandwich'
+          description: ''
+      tags:
+      - sandwichapp
+    post:
+      operationId: createSandwich
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandwich'
+          description: ''
+      tags:
+      - sandwichapp
+  /sandwichapp/sandwich/{id}/:
+    get:
+      operationId: retrieveSandwich
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sandwich.
+        schema:
+          type: string
+      - name: bread
+        required: false
+        in: query
+        description: bread
+        schema:
+          type: string
+      - name: toppings
+        required: false
+        in: query
+        description: toppings
+        schema:
+          type: string
+      - name: cheese
+        required: false
+        in: query
+        description: cheese
+        schema:
+          type: string
+      - name: sauces
+        required: false
+        in: query
+        description: sauces
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandwich'
+          description: ''
+      tags:
+      - sandwichapp
+    put:
+      operationId: updateSandwich
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sandwich.
+        schema:
+          type: string
+      - name: bread
+        required: false
+        in: query
+        description: bread
+        schema:
+          type: string
+      - name: toppings
+        required: false
+        in: query
+        description: toppings
+        schema:
+          type: string
+      - name: cheese
+        required: false
+        in: query
+        description: cheese
+        schema:
+          type: string
+      - name: sauces
+        required: false
+        in: query
+        description: sauces
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandwich'
+          description: ''
+      tags:
+      - sandwichapp
+    patch:
+      operationId: partialUpdateSandwich
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sandwich.
+        schema:
+          type: string
+      - name: bread
+        required: false
+        in: query
+        description: bread
+        schema:
+          type: string
+      - name: toppings
+        required: false
+        in: query
+        description: toppings
+        schema:
+          type: string
+      - name: cheese
+        required: false
+        in: query
+        description: cheese
+        schema:
+          type: string
+      - name: sauces
+        required: false
+        in: query
+        description: sauces
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Sandwich'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandwich'
+          description: ''
+      tags:
+      - sandwichapp
+    delete:
+      operationId: destroySandwich
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sandwich.
+        schema:
+          type: string
+      - name: bread
+        required: false
+        in: query
+        description: bread
+        schema:
+          type: string
+      - name: toppings
+        required: false
+        in: query
+        description: toppings
+        schema:
+          type: string
+      - name: cheese
+        required: false
+        in: query
+        description: cheese
+        schema:
+          type: string
+      - name: sauces
+        required: false
+        in: query
+        description: sauces
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - sandwichapp
+components:
+  schemas:
+    Bread:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        deleted:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        inventory_count:
+          type: integer
+        price:
+          type: integer
+      required:
+      - name
+      - inventory_count
+      - price
+    Topping:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        deleted:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        inventory_count:
+          type: integer
+        price:
+          type: integer
+      required:
+      - name
+      - inventory_count
+      - price
+    Cheese:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        deleted:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        inventory_count:
+          type: integer
+        price:
+          type: integer
+      required:
+      - name
+      - inventory_count
+      - price
+    Sauce:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        deleted:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        inventory_count:
+          type: integer
+        price:
+          type: integer
+      required:
+      - name
+      - inventory_count
+      - price
+    Sandwich:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        bread:
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 255
+            price:
+              type: integer
+          required:
+          - name
+          - price
+          readOnly: true
+        toppings:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                maxLength: 255
+              price:
+                type: integer
+            required:
+            - name
+            - price
+          readOnly: true
+        cheese:
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 255
+            price:
+              type: integer
+          required:
+          - name
+          - price
+          readOnly: true
+        sauces:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                maxLength: 255
+              price:
+                type: integer
+            required:
+            - name
+            - price
+          readOnly: true
+        price:
+          type: integer
+      required:
+      - price
