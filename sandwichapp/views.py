@@ -117,11 +117,40 @@ class SauceView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# class SandwichView(APIView):
-#     def get(self, request, format=None):
-#         sandwiches = Sandwich.objects.all()
-#         serializer = SandwichSerializer(sandwiches, many=True)
-#         return Response(serializer)
+class SandwichView(APIView):
+    def get(self, request, format=None):
+        sandwiches = Sandwich.objects.all()
+        serializer = SandwichSerializer(sandwiches, many=True)
+        return Response(serializer.data)
     
-#     def post(self, request, format=None):
+    def post(self, request, format=None):
+        bread_id = request.data["bread"]
+        bread=Bread.objects.get(pk=bread_id)
 
+        topping_ids = request.data["toppings"]
+        toppings = []
+        for id in topping_ids:
+            topping = Topping.objects.get(pk=id)
+            toppings.append(topping)
+
+        cheese_id = request.data["cheese"]
+        cheese=Cheese.objects.get(pk=cheese_id)
+
+        sauce_ids = request.data["sauces"]
+        sauces = []
+        for id in sauce_ids:
+            sauce = Sauce.objects.get(pk=id)
+            sauces.append(sauce)
+
+
+        #검증
+        #0개이상
+        #2개이하
+        #갯수차감
+
+        serializer = SandwichSerializer(data={})
+        if serializer.is_valid():
+            serializer.save(bread=bread, cheese=cheese, toppings=toppings, sauces = sauces)
+            return Response(serializer.data)
+        print('error')
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
