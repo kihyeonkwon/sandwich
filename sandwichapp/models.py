@@ -6,9 +6,6 @@ class Bread(models.Model):
     name = models.CharField(max_length=255, unique=True)
     inventory_count = models.IntegerField()
     price = models.IntegerField()
-
-
-
     def __str__(self):
         return f'{self.name} 가격{self.price} 남은갯수{self.inventory_count}'
 
