@@ -104,7 +104,7 @@ class SandwichViewSet(viewsets.ModelViewSet):
         serializer = SandwichSerializer(data={"price":price})
         if serializer.is_valid():
             serializer.save(bread=bread, cheese=cheese, toppings=toppings, sauces = sauces)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, pk):
