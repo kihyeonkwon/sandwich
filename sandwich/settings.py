@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'sandwichapp',
     'rest_framework',
     'django_filters',
+    'drf_yasg',
     
 ]
 

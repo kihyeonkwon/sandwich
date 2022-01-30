@@ -8,6 +8,7 @@ class BreadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bread
         fields = '__all__'
+        
 
 class ToppingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,21 +30,25 @@ class SandwichSerializer(serializers.ModelSerializer):
         class Meta:
             model = Bread
             fields = ['name', 'price']
+            ref_name="Sandwich Bread"
     
     class ToppingSerializer(serializers.ModelSerializer):
         class Meta:
             model = Topping
             fields = ['name', 'price']
+            ref_name="Sandwich Topping"
             
     class CheeseSerializer(serializers.ModelSerializer):
         class Meta:
             model = Cheese
             fields = ['name', 'price']
+            ref_name="Sandwich Cheese"
             
     class SauceSerializer(serializers.ModelSerializer):
         class Meta:
             model = Sauce
             fields = ['name', 'price']
+            ref_name="Sandwich Sauce"
 
     bread = BreadSerializer(read_only=True)
     toppings = ToppingSerializer(many=True, read_only=True)
